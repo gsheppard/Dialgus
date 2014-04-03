@@ -13,4 +13,11 @@ FactoryGirl.define do
     user
   end
 
+  factory :employee do
+    first_name 'Sam'
+    last_name 'Winchester'
+    sequence(:email) {|n| "sam.#{n}.winchester@email.com" }
+
+    position
+  end
 end
