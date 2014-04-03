@@ -26,7 +26,8 @@
             <li class="has-dropdown">
               <a href="#"><%= current_user.first_name %></a>
               <ul class="dropdown">
-                <li><a href="#"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></a></li>
+                <li><%= link_to 'Account Settings', edit_user_registration_path %></li>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
               </ul>
             </li>
           <% else %>
