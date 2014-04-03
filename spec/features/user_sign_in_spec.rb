@@ -48,9 +48,20 @@ feature 'user signs in', %q{
     expect(page).to have_content('Sign In')
     expect(page).to have_content('Sign Up')
     expect(page).to_not have_content('Sign Out')
-
   end
 
-  scenario 'attempt sign in with valid email and invalid password'
+  scenario 'attempt sign in with valid email and invalid password' do
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: 'notapassword'
+
+    within(:css, '.form-actions') do
+      click_on 'Sign In'
+    end
+
+    expect(page).to have_content('Invalid email or password.')
+    expect(page).to have_content('Sign In')
+    expect(page).to have_content('Sign Up')
+    expect(page).to_not have_content('Sign Out')
+  end
 
 end
