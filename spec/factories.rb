@@ -6,4 +6,11 @@ FactoryGirl.define do
     password_confirmation 'password'
     sequence(:email) {|n| "example#{n}@email.com"}
   end
+
+  factory :position do
+    sequence(:name) {|n| "Position#{n}_" }
+
+    user
+  end
+
 end

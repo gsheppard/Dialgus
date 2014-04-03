@@ -11,4 +11,6 @@ describe User do
   it { should have_valid(:last_name).when('Winchester', 'Kent') }
   it { should_not have_valid(:last_name).when(nil, '') }
 
+  it { should have_many :positions }
+
 end
