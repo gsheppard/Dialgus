@@ -16,14 +16,19 @@
     <nav class="top-bar" data-topbar>
       <ul class="title-area">
         <li class="name">
-          <h1><a href="#">Dialgus</a></h1>
+          <h1><%= link_to 'Dialgus', root_path %></h1>
         </li>
       </ul>
 
       <section class="top-bar-section">
         <ul class="right">
           <% if current_user %>
-            <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+            <li class="has-dropdown">
+              <a href="#"><%= current_user.first_name %></a>
+              <ul class="dropdown">
+                <li><a href="#"><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></a></li>
+              </ul>
+            </li>
           <% else %>
             <li><%=link_to 'Sign In', new_user_session_path %></li>
             <li class='active'><%=link_to 'Sign Up', new_user_registration_path %></li>
@@ -33,10 +38,16 @@
     </nav>
 
     <% if notice %>
-      <p class="alert-box success"><%= notice %></p>
+      <p class="alert-box success">
+        <%= notice %>
+        <a href="#" class="close">&times;</a>
+      </p>
     <% end %>
     <% if alert %>
-      <p class="alert-box alert"><%= alert %></p>
+      <p class="alert-box alert">
+        <%= alert %>
+        <a href="#" class="close">&times;</a>
+      </p>
     <% end %>
 
     <%= yield %>
