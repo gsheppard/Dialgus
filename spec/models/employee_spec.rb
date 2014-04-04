@@ -22,4 +22,12 @@ describe Employee do
     it { should belong_to :position }
   end
 
+  context 'methods' do
+    it 'should have a full name' do
+      user = FactoryGirl.build(:employee)
+
+      expect(user.full_name).to eq(user.first_name + ' ' + user.last_name)
+    end
+  end
+
 end

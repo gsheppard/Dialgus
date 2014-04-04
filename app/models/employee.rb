@@ -8,4 +8,8 @@ class Employee < ActiveRecord::Base
   validates_inclusion_of :type, in: ['FT', 'PT']
   validates_format_of :email, :with => EmailRegex
 
+  def full_name
+    first_name + ' ' + last_name
+  end
+
 end
