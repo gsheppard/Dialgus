@@ -21,7 +21,7 @@ feature 'manager views positions', %q{
       positions << FactoryGirl.create(:position, user: user)
     end
 
-    visit positions_path
+    visit employees_path
 
     positions.each do |pos|
       expect(page).to have_content(pos.name)
@@ -46,7 +46,7 @@ feature 'manager views positions', %q{
 
     # sign in as second user
     sign_in_as(user_2)
-    visit positions_path
+    visit employees_path
 
     # check that page has correct content and
     # does not have incorrect content
@@ -61,7 +61,7 @@ feature 'manager views positions', %q{
     FactoryGirl.create(:position, user: user)
 
     sign_in_as(user)
-    visit positions_path
+    visit employees_path
 
     page.should have_selector(:link_or_button, 'Add')
     page.should have_link('Remove')
@@ -76,7 +76,7 @@ feature 'manager views positions', %q{
       positions << FactoryGirl.create(:position, user: user)
     end
 
-    visit positions_path
+    visit employees_path
 
     positions.each do |pos|
       expect(page).to_not have_content(pos.name)
