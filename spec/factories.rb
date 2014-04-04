@@ -19,5 +19,6 @@ FactoryGirl.define do
     sequence(:email) {|n| "sam.#{n}.winchester@email.com" }
 
     position
+    user
   end
 end
