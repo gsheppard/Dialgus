@@ -13,9 +13,12 @@ FactoryGirl.define do
     user
   end
 
+  types = ['FT', 'PT']
+
   factory :employee do
     first_name 'Sam'
     last_name 'Winchester'
+    work_type types.sample
     sequence(:email) {|n| "sam.#{n}.winchester@email.com" }
 
     position

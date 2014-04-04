@@ -13,24 +13,35 @@ feature 'manager views emoployees', %q{
   # - Only authorized users can view
 
   before :each do
+    @user = FactoryGirl.create(:user)
     @employees = []
     10.times do
-      @employees << FactoryGirl.create(:employee)
+      @employees << FactoryGirl.create(:employee, user: @user)
     end
-
-    visit '/employees'
   end
 
   scenario 'view list of employees' do
+    sign_in_as(@user)
+    visit employees_path
+
     @employees.each do |emp|
-      expect(page).to have_content(user.full_name)
-      expect(page).to have_content(user.email)
-      expect(page).to have_content(user.position)
-      expect(page).to have_content(user.type)
+      expect(page).to have_content(emp.full_name)
+      expect(page).to have_content(emp.email)
+      expect(page).to have_content(emp.position.name)
+      expect(page).to have_content(emp.work_type)
     end
   end
 
-  scenario 'see link for adding new employees'
-  scenario 'Unauthorized user cannot view'
+  scenario 'see link for adding new employees' do
+    sign_in_as(@user)
+    visit employees_path
+
+    page.should have_selector(:link_or_button, 'Add')
+  end
+
+  scenario 'Unauthorized user cannot view' do
+    visit employees_path
+
+  end
 
 end

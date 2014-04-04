@@ -1,0 +1,28 @@
+<h3>Employees</h3>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Position</th>
+    <th>Type</th>
+  </tr>
+
+  <% @employees.each do |employee| %>
+    <tr>
+      <td><%= employee.full_name %></td>
+      <td><%= employee.email %></td>
+      <td><%= employee.position.name %></td>
+      <td><%= employee.work_type %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= simple_form_for @employee do |f| %>
+  <%= f.input :first_name %>
+  <%= f.input :last_name %>
+  <%= f.input :email %>
+  <%= f.input :position, collection: @positions %>
+  <%= f.input :work_type, collection: ['FT', 'PT'] %>
+  <%= f.button :submit, 'Add Employee' %>
+<% end %>

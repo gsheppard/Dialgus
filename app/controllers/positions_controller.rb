@@ -8,10 +8,4 @@ class PositionsController < ApplicationController
     @position = Position.new
   end
 
-  private
-  def authenticated?
-    unless current_user
-      redirect_to root_path, alert: 'Access Denied'
-    end
-  end
 end
