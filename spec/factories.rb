@@ -4,7 +4,7 @@ FactoryGirl.define do
     last_name 'Winchester'
     password 'password'
     password_confirmation 'password'
-    sequence(:email) {|n| "example#{n}@email.com"}
+    sequence(:email) {|n| "example#{n}_@email.com"}
   end
 
   factory :position do
@@ -24,4 +24,5 @@ FactoryGirl.define do
     position
     user
   end
+
 end

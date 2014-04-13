@@ -4,4 +4,5 @@ Dialgus::Application.routes.draw do
 
   resources :positions, only: [:index, :new]
   resources :employees, only: [:index]
+  resources :positions, only: [:show, :create]
 end
