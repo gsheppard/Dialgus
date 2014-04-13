@@ -1,5 +1,5 @@
 class EmployeesController < ApplicationController
-  before_filter :authenticated?
+  before_action :authenticate_user!
 
   def index
     @employees = current_user.employees

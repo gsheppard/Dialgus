@@ -83,7 +83,7 @@ feature 'manager views positions', %q{
     end
 
     expect(page).to_not have_content('Remove')
-    expect(page).to have_content('Access Denied')
+    expect(page).to have_content('You need to sign in or sign up before continuing.')
   end
 
 end

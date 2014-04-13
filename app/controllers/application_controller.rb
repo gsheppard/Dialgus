@@ -10,9 +10,4 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name]
   end
 
-  def authenticated?
-    unless current_user
-      redirect_to root_path, alert: 'Access Denied'
-    end
-  end
 end
