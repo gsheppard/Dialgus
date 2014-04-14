@@ -28,10 +28,12 @@ feature 'manager views schedules list', %q{
     end
 
     scenario "cannot see other users' schedules" do
-      other_week = FactoryGirl.create(:schedule, week_of: DateTime.now.beginning_of_week(:sunday) + 1.weeks)
+      other_week = FactoryGirl.create(:schedule, week_of: DateTime.now.beginning_of_week(:sunday) + 2.weeks)
       visit current_path
 
-      expect(page).to_not have_content(other_week.week_of.strftime("%b %d, %Y"))
+      within(:css, ".schedules_list") do
+        expect(page).to_not have_content(other_week.week_of.strftime("%b %d, %Y"))
+      end
     end
   end
 
