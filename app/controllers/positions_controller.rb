@@ -5,7 +5,10 @@ class PositionsController < ApplicationController
     if @position.save
       redirect_to employees_path, notice: 'Position created'
     else
-      redirect_to employees_path, alert: 'Position not saved'
+      @employee = Employee.new
+      @employees = current_user.employees
+      @positions = current_user.positions
+      render 'employees/index'
     end
   end
 

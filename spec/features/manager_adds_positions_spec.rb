@@ -37,8 +37,7 @@ feature 'manager adds positions', %q{
         click_button 'Add'
       end
 
-      expect(current_path).to eq(employees_path)
-      expect(page).to have_content('Position not saved')
+      expect(page).to have_content("can't be blank")
       expect(Position.count).to eq(@prev_count)
     end
 
@@ -49,7 +48,7 @@ feature 'manager adds positions', %q{
         click_button 'Add'
       end
 
-      expect(page).to have_content('Position not saved')
+      expect(page).to have_content("already been taken")
       expect(Position.count).to eq(@prev_count)
     end
   end
