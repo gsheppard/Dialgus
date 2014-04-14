@@ -14,45 +14,45 @@
 
   <body>
 
-    <div class="contain-to-grid sticky">
-      <nav class="top-bar" data-topbar>
-        <ul class="title-area">
-          <li class="name">
-            <h1><%= link_to 'Dialgus', root_path %></h1>
-          </li>
+
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><%= link_to 'Dialgus', root_path %></h1>
+        </li>
+      </ul>
+
+      <section class="top-bar-section">
+        <ul class="right">
+          <% if current_user %>
+            <li><%= link_to 'Employee Portal', employees_path %></li>
+            <li class="has-dropdown">
+              <a href="#"><%= current_user.first_name %></a>
+              <ul class="dropdown">
+                <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
+                <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
+              </ul>
+            </li>
+          <% else %>
+            <li><%=link_to 'Sign In', new_user_session_path %></li>
+            <li class='active'><%=link_to 'Sign Up', new_user_registration_path %></li>
+          <% end %>
         </ul>
+      </section>
+    </nav>
 
-        <section class="top-bar-section">
-          <ul class="right">
-            <% if current_user %>
-              <li class="has-dropdown">
-                <a href="#"><%= current_user.first_name %></a>
-                <ul class="dropdown">
-                  <li><%= link_to 'Edit Account', edit_user_registration_path %></li>
-                  <li><%= link_to 'Sign Out', destroy_user_session_path, method: :delete %></li>
-                </ul>
-              </li>
-            <% else %>
-              <li><%=link_to 'Sign In', new_user_session_path %></li>
-              <li class='active'><%=link_to 'Sign Up', new_user_registration_path %></li>
-            <% end %>
-          </ul>
-        </section>
-      </nav>
-
-      <% if notice %>
-        <p class="alert-box success">
-          <%= notice %>
-          <a href="#" class="close">&times;</a>
-        </p>
-      <% end %>
-      <% if alert %>
-        <p class="alert-box alert">
-          <%= alert %>
-          <a href="#" class="close">&times;</a>
-        </p>
-      <% end %>
-    </div>
+    <% if notice %>
+      <p class="alert-box success">
+        <%= notice %>
+        <a href="#" class="close">&times;</a>
+      </p>
+    <% end %>
+    <% if alert %>
+      <p class="alert-box alert">
+        <%= alert %>
+        <a href="#" class="close">&times;</a>
+      </p>
+    <% end %>
 
     <div class="row">
       <div class"small-12 columns">
