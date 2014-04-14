@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
   validates_presence_of :first_name, :last_name
   has_many :positions
   has_many :employees
+  has_many :schedules
 end

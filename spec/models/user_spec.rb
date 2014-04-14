@@ -12,5 +12,5 @@ describe User do
   it { should_not have_valid(:last_name).when(nil, '') }
 
   it { should have_many :positions }
-
+  it { should have_many :schedules }
 end
