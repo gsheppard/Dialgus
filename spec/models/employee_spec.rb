@@ -3,6 +3,9 @@ require 'spec_helper'
 describe Employee do
 
   context 'validations' do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:employee1) { FactoryGirl.create(:employee, user: user) }
+
     it { should validate_presence_of :first_name }
     it { should validate_presence_of :last_name }
     it { should validate_presence_of :email }
@@ -15,6 +18,18 @@ describe Employee do
 
     it { should have_valid(:email).when('email@email.com', 'name.last@sub.domain.edu') }
     it { should_not have_valid(:email).when(nil, '', 'hello', 'email@com', 'first.last') }
+
+    it 'should not allow duplicate email addresses used' do
+      employee2 = FactoryGirl.build(:employee, email: employee1.email, user: user)
+
+      expect(employee2).to_not be_valid
+    end
+
+    it 'should allow duplicate email if used by another user' do
+      employee2 = FactoryGirl.build(:employee, email: employee1.email)
+
+      expect(employee2).to be_valid
+    end
   end
 
   context 'associations' do
