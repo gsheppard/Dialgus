@@ -11,3 +11,11 @@
 
     <% end %>
 </div>
+
+<div class="row">
+  <%= simple_form_for @schedule do |f| %>
+    <%= f.input :week_of, collection: @upcoming.map! {|d| d.strftime("%b %d, %Y")} %>
+
+    <%= f.button :submit, 'Create' %>
+  <% end %>
+</div>
