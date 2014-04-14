@@ -25,4 +25,9 @@ FactoryGirl.define do
     user
   end
 
+  factory :schedule do
+    week_of DateTime.now.at_beginning_of_week(:sunday)
+
+    user
+  end
 end
