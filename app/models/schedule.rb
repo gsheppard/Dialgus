@@ -5,7 +5,7 @@ class Schedule < ActiveRecord::Base
   belongs_to :user
 
   def must_be_a_sunday
-    if !week_of.nil? && week_of != week_of.at_beginning_of_week(:sunday)
+    if !week_of.nil? && week_of.wday != 0
       errors.add(:week_of, "must be a Sunday")
     end
   end

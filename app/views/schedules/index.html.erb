@@ -1,0 +1,9 @@
+<div class="row">
+    <%= @schedules.each do |schedule| %>
+      <div class="row">
+        <div class="small-4 columns small-centered">
+          <%= schedule.week_of.strftime("%b %d, %Y") %>
+        </div>
+      </div>
+    <% end %>
+</div>
