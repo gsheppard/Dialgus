@@ -38,7 +38,7 @@
       </div>
 
       <div class="small-8 medium-4 columns">
-        <%= f.input :position, collection: @positions %>
+        <%= f.association :position, collection: @positions %>
       </div>
       <div class="small-8 columns">
         <%= f.input :work_type, collection: ['FT', 'PT'], as: :radio_buttons %>
