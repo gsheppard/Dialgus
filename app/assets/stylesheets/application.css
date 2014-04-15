@@ -13,3 +13,18 @@
 
  *= require_tree .
  */
+
+.schedules {
+  margin: 10px auto;
+}
+.schedules td {
+  padding: 0 0;
+  margin: 0 0;
+}
+.schedules select {
+  font-size: 11px;
+  height: 30px;
+  width: 65px;
+  padding: 0 0;
+  margin: 0 0;
+}

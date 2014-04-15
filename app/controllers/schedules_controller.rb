@@ -37,11 +37,36 @@ class SchedulesController < ApplicationController
   end
 
   def show
+    @week = Schedule.find(params[:id])
+    @shifts = build_employee_shifts
 
+    @weekdays = []
+    7.times do |n|
+      @weekdays << @week.week_of + n.days
+    end
   end
 
   private
   def schedule_params
     params.require(:schedule).permit(:week_of).merge(user: current_user)
+  end
+
+  def build_employee_shifts
+    schedule = Schedule.find(params[:id])
+    schedules = Shift.where(schedule: schedule).order(:start_time)
+    employees = Employee.where(user: current_user)
+
+    shifts = {}
+    employees.each do |emp|
+      shifts[emp] ||= []
+
+      schedules.each do |sched|
+        if sched.employee == emp
+          shifts[emp] << sched
+        end
+      end
+    end
+
+    shifts
   end
 end
