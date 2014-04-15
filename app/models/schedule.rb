@@ -3,7 +3,7 @@ class Schedule < ActiveRecord::Base
   validate :must_be_a_sunday
 
   belongs_to :user
-  has_many :shifts
+  has_many :shifts, dependent: :destroy
 
   def must_be_a_sunday
     if !week_of.nil? && week_of.wday != 0

@@ -5,7 +5,7 @@ describe Schedule do
   it { should validate_presence_of :user }
 
   it { should belong_to :user }
-  it { have_many :shifts }
+  it { have_many(:shifts).dependent(:destroy) }
 
   it 'should be a sunday' do
     user = FactoryGirl.create(:user)
