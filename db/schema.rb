@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140414174107) do
+ActiveRecord::Schema.define(version: 20140414224015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20140414174107) do
   create_table "schedules", force: true do |t|
     t.datetime "week_of",    null: false
     t.integer  "user_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "shifts", force: true do |t|
+    t.integer  "employee_id"
+    t.integer  "schedule_id"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
