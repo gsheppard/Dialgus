@@ -16,11 +16,23 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.new(schedule_params)
+    @employees = Employee.where(user: current_user)
 
     if @schedule.save
-      redirect_to schedule_path(@schedule)
+      @employees.each do |emp|
+        7.times do |n|
+          Shift.create(
+            employee: emp,
+            schedule: Schedule.where(week_of: @schedule.week_of).first,
+            start_time: @schedule.week_of + n.days,
+            end_time: @schedule.week_of + n.days
+          )
+        end
+      end
+
+      redirect_to schedule_path(@schedule), notice: 'Schedule created successfully.'
     else
-      render :index
+      redirect_to schedules_path, alert: 'Oops! Something happened.'
     end
   end
 

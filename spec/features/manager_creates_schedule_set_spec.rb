@@ -17,7 +17,7 @@ feature "manager creates schedule set", %q{
 
   let(:user) { FactoryGirl.create(:user) }
   let(:sunday) { DateTime.now.beginning_of_week(:sunday) }
-  let(:employees) { FactoryGirl.create_list(:employee, 5, user: user) }
+  let!(:employees) { FactoryGirl.create_list(:employee, 5, user: user) }
 
   before :each do
     sign_in_as(user)
