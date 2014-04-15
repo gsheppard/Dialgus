@@ -13,14 +13,12 @@ feature 'manager views schedules list', %q{
 
   let(:user) { FactoryGirl.create(:user) }
   let!(:week) { FactoryGirl.create(:schedule, user: user) }
+  let!(:employees) { FactoryGirl.create_list(:employee, 5, user: user) }
 
   context "signed in" do
     before :each do
       sign_in_as(user)
-    end
-
-    scenario "after log in, I'm redirected to the schedules list path" do
-      expect(current_path).to eq(schedules_path)
+      visit schedules_path
     end
 
     scenario "views a list of the created schedules" do

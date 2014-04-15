@@ -9,9 +9,4 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) << [:first_name, :last_name]
   end
-
-  def after_sign_in_path_for(resource)
-    schedules_path
-  end
-
 end
