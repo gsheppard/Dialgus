@@ -1,21 +1,25 @@
-<div class="row schedules_list">
-    <% if !@schedules.empty? %>
-
-      <% @schedules.each do |schedule| %>
-        <div class="row">
-          <div class="small-4 columns small-centered">
-            <%= schedule.week_of.strftime("%b %d, %Y") %>
-          </div>
-        </div>
-      <% end %>
-
-    <% end %>
-</div>
-
 <div class="row">
-  <%= simple_form_for @schedule do |f| %>
-    <%= f.input :week_of, collection: @upcoming.map! {|d| d.strftime("%b %d, %Y")} %>
+  <div class="small-6 columns schedules_list">
+    <h2>Available Schedules</h2>
+      <% if !@schedules.empty? %>
 
-    <%= f.button :submit, 'Create' %>
-  <% end %>
+        <% @schedules.each do |schedule| %>
+          <div class="row">
+            <div class="small-4 columns small-centered">
+              <h4><%= link_to schedule.week_of.strftime("%b %d, %Y"), schedule_path(schedule) %></h4>
+            </div>
+          </div>
+        <% end %>
+
+      <% end %>
+  </div>
+
+  <div class="small-6 columns">
+    <h2>Create New Schedule</h2>
+    <%= simple_form_for @schedule do |f| %>
+      <%= f.input :week_of, collection: @upcoming.map! {|d| d.strftime("%b %d, %Y")}, label: false %>
+
+      <%= f.button :submit, 'Create' %>
+    <% end %>
+  </div>
 </div>

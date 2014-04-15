@@ -11,7 +11,7 @@ class SchedulesController < ApplicationController
     @upcoming = []
 
     7.times do |num|
-      sunday = DateTime.now.beginning_of_week(:sunday) + (num + 1).weeks
+      sunday = DateTime.now.utc.beginning_of_week(:sunday) + (num + 1).weeks
       if Schedule.new(user:current_user,week_of:sunday).valid?
         @upcoming << sunday
       end
