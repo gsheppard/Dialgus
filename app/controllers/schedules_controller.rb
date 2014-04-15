@@ -2,6 +2,10 @@ class SchedulesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+    if current_user.employees.count < 1
+      redirect_to employees_path, alert: "Please create an employee before continuing."
+    end
+
     @schedules = Schedule.where(user: current_user).order(:week_of).limit(10)
     @schedule = Schedule.new
     @upcoming = []

@@ -15,30 +15,47 @@ feature "manager creates schedule set", %q{
   # When I am finished, I can choose to save the schedule
   # => and it becomes part of the viewable schedules
 
-  let(:user) { FactoryGirl.create(:user) }
-  let(:sunday) { DateTime.now.beginning_of_week(:sunday) }
-  let!(:employees) { FactoryGirl.create_list(:employee, 5, user: user) }
+  context "with employees" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:sunday) { DateTime.now.beginning_of_week(:sunday) }
+    let!(:employees) { FactoryGirl.create_list(:employee, 5, user: user) }
 
-  before :each do
-    sign_in_as(user)
-    visit schedules_path
-  end
+    before :each do
+      sign_in_as(user)
+      visit schedules_path
+    end
 
-  scenario "expect list of upcoming weeks" do
-    upcoming = [sunday + 1.weeks, sunday + 2.weeks, sunday + 3.weeks, sunday + 4.weeks]
+    scenario "expect list of upcoming weeks" do
+      upcoming = [sunday + 1.weeks, sunday + 2.weeks, sunday + 3.weeks, sunday + 4.weeks]
 
-    upcoming.each do |week|
-      expect(page).to have_content(week.strftime("%b %d, %Y"))
+      upcoming.each do |week|
+        expect(page).to have_content(week.strftime("%b %d, %Y"))
+      end
+    end
+
+    scenario "create new week's worth of schedules" do
+      select (sunday + 1.weeks).strftime("%b %d, %Y"), from: "Week of"
+
+      within(:css, ".new_schedule") do
+        click_on "Create"
+      end
+
+      expect(user.schedules.first.shifts.count).to eq(user.employees.count * 7)
     end
   end
 
-  scenario "create new week's worth of schedules" do
-    select (sunday + 1.weeks).strftime("%b %d, %Y"), from: "Week of"
+  context "without employees" do
+    let(:user) { FactoryGirl.create(:user) }
+    let(:sunday) { DateTime.now.beginning_of_week(:sunday) }
 
-    within(:css, ".new_schedule") do
-      click_on "Create"
+    before :each do
+      sign_in_as(user)
+      visit schedules_path
     end
 
-    expect(user.schedules.first.shifts.count).to eq(user.employees.count * 7)
+    scenario "does not create a schedule if no employees exist" do
+      expect(current_path).to eq(employees_path)
+      expect(page).to have_content("Please create an employee before continuing.")
+    end
   end
 end
