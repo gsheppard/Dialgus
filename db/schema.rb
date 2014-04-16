@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140416153709) do
   add_index "positions", ["user_id"], name: "index_positions_on_user_id", using: :btree
 
   create_table "requests", force: true do |t|
+    t.integer  "user_id"
     t.integer  "employee_id"
     t.datetime "request_date"
     t.string   "request_type"
