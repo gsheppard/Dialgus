@@ -17,4 +17,17 @@ module ApplicationHelper
     end
   end
 
+  def strftime_to_military(time_string)
+    # takes a string formatted as 12:30 PM
+    time = time_string.gsub(':', ' ').split(' ')
+    time[0] = time[0].to_i
+
+    if time[2] == 'PM' && time[0] != 12
+      time[0] += 12
+    end
+
+    time.pop
+    time.join('')
+  end
+
 end

@@ -14,6 +14,8 @@
  *= require_tree .
  */
 
+/* Daily Planner */
+
 .schedules {
   margin: 10px auto;
 }
@@ -27,4 +29,39 @@
   width: 65px;
   padding: 0 0;
   margin: 0 0;
+}
+
+#detailview {
+  margin: 0;
+  padding: 0;
+}
+
+#detailview div {
+  position: relative;
+  margin: 10px 0;
+}
+
+#detailview .name {
+  background: #333;
+  color: #FFF;
+  padding: 0.5em 0.75em;
+  width: 20%;
+}
+
+#detailview .shell {
+  background-color: #F5F5F5;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 80%;
+}
+
+#detailview .bar {
+  background: red;
+  margin: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }

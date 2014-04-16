@@ -1,35 +1,51 @@
 <%= simple_form_for @week do |f| %>
+  <%= f.button :submit, 'Save', action: :update %>
   <table class="schedules">
-    <tr>
+    <thead>
       <th>Employee</th>
       <% @weekdays.each do |wd| %>
-        <th colspan="2">
+        <th colspan="2" class="weekday" data-weekday="<%= wd.wday %>">
           <%= wd.strftime("%A") %><br>
           <%= wd.strftime("%m/%d") %>
         </th>
       <% end %>
-    </tr>
+    </thead>
 
-    <% @shifts.each do |employee, shifts| %>
-      <tr>
-        <td class="name"><%= employee.first_name %></td>
+    <tbody>
+      <% @shifts.each do |employee, shifts| %>
+        <tr>
+          <td class="name"><%= employee.first_name %></td>
 
-        <%= f.simple_fields_for "employee_#{employee.id}" do |ff| %>
-          <% shifts.each_with_index do |shift, i| %>
-            <%= ff.simple_fields_for "shift_#{i}_#{shift.id}", shift do |s| %>
-              <td>
-                <%= s.input :start_time, label: false, selected: [shift.start_time.strftime("%l:%M %p")], collection: time_drop_down(shift.start_time) %>
-              </td>
-              <td>
-                <%= s.input :end_time, label: false, selected: [shift.end_time.strftime("%l:%M %p")], collection: time_drop_down(shift.end_time) %>
-              </td>
+          <%= f.simple_fields_for "employee_#{employee.id}" do |ff| %>
+            <% shifts.each_with_index do |shift, i| %>
+              <%= ff.simple_fields_for "shift_#{i}_#{shift.id}", shift do |s| %>
+                <td class="start" data-weekday="<%= shift.start_time.wday %>">
+                  <%= s.input :start_time, label: false, selected: [shift.start_time.strftime("%l:%M %p")], collection: time_drop_down(shift.start_time), value_method: lambda{|d| strftime_to_military(d) } %>
+                </td>
+                <td class="end" data-weekday="<%= shift.start_time.wday %>">
+                  <%= s.input :end_time, label: false, selected: [shift.end_time.strftime("%l:%M %p")], collection: time_drop_down(shift.end_time), value_method: lambda{|d| strftime_to_military(d) } %>
+                </td>
+              <% end %>
             <% end %>
           <% end %>
-        <% end %>
-      </tr>
-    <% end %>
+        </tr>
+      <% end %>
+    </tbody>
 
   </table>
 
-  <%= f.button :submit, 'Save' %>
+
 <% end %>
+
+
+<figure id="detailview"></figure>
+
+<script id="detailItem" type="text/template">
+  <div class="row">
+    <div class="name small-4 columns"></div>
+    <div class="shell">
+      <div class="bar" style="width: %width%; left: %left%;">
+      </div>
+    </div>
+  </div>
+</script>
