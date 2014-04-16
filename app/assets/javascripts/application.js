@@ -12,14 +12,13 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.all
 //= require foundation
 //= require_tree .
-
-$(document).ready(function(){
-
-  $(document).foundation();
-
-  $('.schedules').on('click', 'th[data-weekday]', function(e){
+  $(function() {
+    $('.datepicker').datepicker();
+    $(document).foundation();
+      $('.schedules').on('click', 'th[data-weekday]', function(e){
 
     var self = $(this);
     var weekday = self.data('weekday');
@@ -59,6 +58,4 @@ $(document).ready(function(){
     });
 
   });
-
-
-});
+  });
