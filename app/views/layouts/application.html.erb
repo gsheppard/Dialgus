@@ -25,8 +25,13 @@
       <section class="top-bar-section">
         <ul class="right">
           <% if current_user %>
-            <li><%= link_to 'Schedules', schedules_path %></li>
             <li><%= link_to 'Employees', employees_path %></li>
+            <li class="has-dropdown">
+              <%= link_to 'Schedules', schedules_path %>
+              <ul class="dropdown">
+                <li><%= link_to "Time Off Requests", requests_path %></li>
+              </ul>
+            </li>
             <li class="has-dropdown">
               <a href="#"><%= current_user.first_name %></a>
               <ul class="dropdown">
@@ -41,21 +46,11 @@
         </ul>
       </section>
     </nav>
+    <%= render 'layouts/flash' %>
 
-    <% if notice %>
-      <p class="alert-box success">
-        <%= notice %>
-        <a href="#" class="close">&times;</a>
-      </p>
-    <% end %>
-    <% if alert %>
-      <p class="alert-box alert">
-        <%= alert %>
-        <a href="#" class="close">&times;</a>
-      </p>
-    <% end %>
-
-    <%= yield %>
+    <div id="main-content">
+      <%= yield %>
+    </div>
 
     <%= javascript_include_tag "application" %>
   </body>
