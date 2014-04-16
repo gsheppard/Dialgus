@@ -88,11 +88,10 @@ class SchedulesController < ApplicationController
   def s_to_time(week, time)
     # week is the seed data for year/month/day
     # time is the time formatted as 1730
-    if time.blank?
+    if time.blank? || time.nil? || time == "0"
       hour = 0
       minute = 0
     else
-      binding.pry
       time = time.split('')
       hour = (time[0] + time[1]).to_i
       minute = (time[2] + time[3]).to_i

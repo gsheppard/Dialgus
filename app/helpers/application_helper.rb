@@ -27,7 +27,9 @@ module ApplicationHelper
     end
 
     time.pop
-    time.join('')
+    time = time.join('')
+    time = "0" + time if time.length < 4
+    time
   end
 
 end
