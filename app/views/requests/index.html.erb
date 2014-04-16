@@ -1,0 +1,8 @@
+<%= simple_form_for @request do |f| %>
+  <%= f.association :employee, collection: @employees, label_method: :first_name %>
+  <%= f.input :request_date, as: :string, input_html: { class: 'datepicker' } %>
+  <%= f.input :request_type, collection: ["Vacation", "Sick"] %>
+
+  <%= f.button :submit, "Add" %>
+<% end %>
+
