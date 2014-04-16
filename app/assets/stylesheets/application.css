@@ -66,3 +66,11 @@
   top: 0;
   bottom: 0;
 }
+
+.sick select {
+  background-color: #E37668;
+}
+
+.vaca select {
+  background-color: #57D36B
+}

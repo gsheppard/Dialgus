@@ -1,3 +1,22 @@
+<table>
+  <thead>
+    <th>Employee</th>
+    <th>Position</th>
+    <th>Date</th>
+    <th>Type</th>
+  </thead>
+  <tbody>
+    <% @requests.each do |request| %>
+      <tr>
+        <td><%= request.employee.first_name %></td>
+        <td><%= request.employee.position.name %></td>
+        <td><%= request.request_date %></td>
+        <td><%= request.request_type %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 <%= simple_form_for @request do |f| %>
   <%= f.association :employee, collection: @employees, label_method: :first_name %>
   <%= f.input :request_date, as: :string, input_html: { class: 'datepicker' } %>

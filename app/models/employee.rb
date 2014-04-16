@@ -1,6 +1,7 @@
 class Employee < ActiveRecord::Base
   belongs_to :user
   belongs_to :position
+  has_many :requests
 
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
