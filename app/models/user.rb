@@ -8,4 +8,5 @@ class User < ActiveRecord::Base
   has_many :positions
   has_many :employees
   has_many :schedules
+  has_many :requests
 end

@@ -13,4 +13,5 @@ describe User do
 
   it { should have_many :positions }
   it { should have_many :schedules }
+  it { should have_many :requests }
 end

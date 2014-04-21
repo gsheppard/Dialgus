@@ -16,7 +16,7 @@ FactoryGirl.define do
   types = ['FT', 'PT']
 
   factory :employee do
-    first_name 'Sam'
+    sequence(:first_name) {|n| "Sam#{n}_" }
     last_name 'Winchester'
     work_type types.sample
     sequence(:email) {|n| "sam.#{n}.winchester@email.com" }
