@@ -13,6 +13,8 @@ class RequestsController < ApplicationController
     if @request.save
       redirect_to requests_path, notice: "Request successfully created."
     else
+      @requests = Request.where(user: current_user)
+      @employees = Employee.where(user: current_user)
       render :index, alert: "Request not created."
     end
   end
@@ -21,6 +23,11 @@ class RequestsController < ApplicationController
   def request_params
     date = params[:request][:request_date].split('/')
     date.map!{|d| d.to_i}
-    params.require(:request).permit(:employee_id, :request_type).merge(user: current_user, request_date: DateTime.new(date[2], date[0], date[1]).utc)
+
+    if date.empty?
+      params.require(:request).permit(:employee_id, :request_type).merge(user: current_user)
+    else
+      params.require(:request).permit(:employee_id, :request_type).merge(user: current_user, request_date: DateTime.new(date[2], date[0], date[1]).utc)
+    end
   end
 end
