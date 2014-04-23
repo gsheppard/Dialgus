@@ -71,8 +71,11 @@ class SchedulesController < ApplicationController
     @shifts = build_employee_shifts
 
     @weekdays = []
-    7.times do |n|
-      @weekdays << @week.week_of + n.days
+    7.times { |n| @weekdays << @week.week_of + n.days }
+
+    @times = {}
+    (8..23).to_a.each do |n|
+      @times[n.to_s + ":00"] = (0..3).to_a.map { |min| n.to_s + ":" + (min*15).to_s.rjust(2, "0") }
     end
   end
 

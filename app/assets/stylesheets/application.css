@@ -74,3 +74,22 @@
 .vaca select {
   background-color: #57D36B
 }
+
+h1.algreya {
+  font-family: 'Alegreya Sans', 'sans-serif';
+}
+
+.daily-planner th {
+  font-size: .5em;
+  padding: 5px;
+  colspan: ;
+}
+
+.daily-planner {
+  margin: 10px auto;
+}
+
+.fifteen-min {
+  width: 12px;
+  padding: 0;
+}

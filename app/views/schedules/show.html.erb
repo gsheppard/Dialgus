@@ -49,3 +49,23 @@
     </div>
   </div>
 </script>
+
+<table class="daily-planner">
+  <thead>
+    <th></th>
+    <% @times.keys.each do |hour| %>
+      <th colspan="4"><%= hour %></th>
+    <% end %>
+  </thead>
+
+  <tbody>
+    <% @shifts.keys.each do |employee| %>
+      <tr>
+        <td><%= employee.first_name %></td>
+        <% @times.values.flatten.each do |min| %>
+          <td class="fifteen-min <%= min.delete(':') %>"></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
