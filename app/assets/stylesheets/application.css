@@ -43,10 +43,8 @@
 }
 
 #detailview .name {
-  background: #333;
-  color: #FFF;
   padding: 0.5em 0.75em;
-  width: 20%;
+  width: 100px;
 }
 
 #detailview .shell {
@@ -72,7 +70,7 @@
 }
 
 .vaca select {
-  background-color: #57D36B
+  background-color: #57D36B;
 }
 
 h1.algreya {
@@ -80,9 +78,8 @@ h1.algreya {
 }
 
 .daily-planner th {
-  font-size: .5em;
+  font-size: .6em;
   padding: 5px;
-  colspan: ;
 }
 
 .daily-planner {
@@ -92,4 +89,9 @@ h1.algreya {
 .fifteen-min {
   width: 12px;
   padding: 0;
+  margin: 0;
+}
+
+.occupied {
+  background-color: #E37668;
 }

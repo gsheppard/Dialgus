@@ -75,7 +75,14 @@ class SchedulesController < ApplicationController
 
     @times = {}
     (8..23).to_a.each do |n|
-      @times[n.to_s + ":00"] = (0..3).to_a.map { |min| n.to_s + ":" + (min*15).to_s.rjust(2, "0") }
+      if n >= 12
+        n > 12 ? hour = n - 12 : hour = n
+        ampm = " PM"
+      else
+        hour = n
+        ampm = " AM"
+      end
+      @times[hour.to_s + ":00" + ampm] = (0..3).to_a.map { |min| n*100 + (min*15) }
     end
   end
 

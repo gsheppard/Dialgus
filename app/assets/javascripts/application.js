@@ -15,10 +15,12 @@
 //= require jquery.ui.all
 //= require foundation
 //= require_tree .
-  $(function() {
-    $('.datepicker').datepicker();
-    $(document).foundation();
-      $('.schedules').on('click', 'th[data-weekday]', function(e){
+
+$(function() {
+  $('.datepicker').datepicker();
+  $(document).foundation();
+
+  $('.schedules').on('click', 'th[data-weekday]', function(e){
 
     var self = $(this);
     var weekday = self.data('weekday');
@@ -45,17 +47,25 @@
       var start = Number( selects.filter('.start').find('select').val() );
       var end = Number( selects.filter('.end').find('select').val() );
 
-      // Set the bar's width
-      var bar = shift.find('.bar');
-          bar.css('width', ( (end-start) / 2400 ) * 100 + '%');
+      // Set the starting and ending cells colors to indicate they're occupied
+      shift.find('.' + start).addClass('occupied');
+      shift.find('.' + end).addClass('occupied');
 
-      // Append the template to the destination (<figure>)
+      var i = start
+      while (i < end) {
+        shift.find('.' + i).addClass('occupied');
+
+        if ((i - 45) % 100 == 0 ) {
+          i += 55
+        } else {
+          i += 15
+        };
+      };
+
+      // Append the template to the destination (<tbody> within <table class="daily-planner">)
       shift.appendTo(destination);
-
-      // Has to happen after it's inserted, because the parent doesn't have width until it's in the DOM and rendered!
-      bar.css('left', ( start / ( bar.parent().width() / 2400 )) / 100 + '%' );
 
     });
 
   });
-  });
+});

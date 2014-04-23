@@ -37,35 +37,22 @@
 
 <% end %>
 
-
-<figure id="detailview"></figure>
-
-<script id="detailItem" type="text/template">
-  <div class="row">
-    <div class="name small-4 columns"></div>
-    <div class="shell">
-      <div class="bar" style="width: %width%; left: %left%;">
-      </div>
-    </div>
-  </div>
-</script>
-
 <table class="daily-planner">
   <thead>
     <th></th>
     <% @times.keys.each do |hour| %>
-      <th colspan="4"><%= hour %></th>
+      <th colspan="4" class="hour"><%= hour %></th>
     <% end %>
   </thead>
 
-  <tbody>
-    <% @shifts.keys.each do |employee| %>
-      <tr>
-        <td><%= employee.first_name %></td>
-        <% @times.values.flatten.each do |min| %>
-          <td class="fifteen-min <%= min.delete(':') %>"></td>
-        <% end %>
-      </tr>
-    <% end %>
-  </tbody>
+  <tbody id="detailview"></tbody>
 </table>
+
+<script id="detailItem" type="text/template">
+  <tr>
+    <td class="name"></td>
+    <% @times.values.flatten.each do |min| %>
+      <td class="fifteen-min <%= min %>"></td>
+    <% end %>
+  </tr>
+</script>
