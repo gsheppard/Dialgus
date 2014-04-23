@@ -1,4 +1,8 @@
 class PositionsController < ApplicationController
+  def index
+    redirect_to employees_path
+  end
+
   def create
     @position = Position.new(position_params.merge(user: current_user))
 

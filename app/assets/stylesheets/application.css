@@ -73,7 +73,7 @@
   background-color: #57D36B;
 }
 
-h1.algreya {
+.algreya {
   font-family: 'Alegreya Sans', 'sans-serif';
 }
 
@@ -94,4 +94,8 @@ h1.algreya {
 
 .occupied {
   background-color: #E37668;
+}
+
+.employees table, .positions table {
+  width: 100%;
 }
