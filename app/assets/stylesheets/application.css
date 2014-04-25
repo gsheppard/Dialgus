@@ -108,3 +108,7 @@
 .fc-week:hover {
   background-color: #FAE6EE;
 }
+
+.schedules input.button {
+  margin: 0;
+}

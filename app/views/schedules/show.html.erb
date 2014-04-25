@@ -1,8 +1,11 @@
+<div class="row">
+  <h3 class="algreya text-center">Week of: <%= @week.week_of.strftime("%b %d, %Y") %></h3>
+</div>
+
 <%= simple_form_for @week do |f| %>
-  <%= f.button :submit, 'Save', action: :update %>
   <table class="schedules">
     <thead>
-      <th>Employee</th>
+      <th><%= f.button :submit, 'Save', action: :update, class: 'tiny' %></th>
       <% @weekdays.each do |wd| %>
         <th colspan="2" class="weekday" data-weekday="<%= wd.wday %>">
           <%= wd.strftime("%A") %><br>
