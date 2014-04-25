@@ -48,19 +48,11 @@ $(function() {
       var end = Number( selects.filter('.end').find('select').val() );
 
       // Set the starting and ending cells colors to indicate they're occupied
-      shift.find('.' + start).addClass('occupied');
-      shift.find('.' + end).addClass('occupied');
+      var left = shift.find('.' + start).addClass('occupied');
+      var right = shift.find('.' + end);
 
-      var i = start
-      while (i < end) {
-        shift.find('.' + i).addClass('occupied');
-
-        if ((i - 45) % 100 == 0 ) {
-          i += 55
-        } else {
-          i += 15
-        };
-      };
+      // Fill in everything inbetween
+      left.nextUntil(right).addClass('occupied');
 
       // Append the template to the destination (<tbody> within <table class="daily-planner">)
       shift.appendTo(destination);

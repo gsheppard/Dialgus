@@ -83,6 +83,7 @@
 }
 
 .daily-planner {
+  width: 100%;
   margin: 10px auto;
 }
 
@@ -98,4 +99,12 @@
 
 .employees table, .positions table {
   width: 100%;
+}
+
+.week-highlight {
+  background-color: #FAE6EE;
+}
+
+.fc-week:hover {
+  background-color: #FAE6EE;
 }

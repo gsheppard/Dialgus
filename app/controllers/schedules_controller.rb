@@ -20,6 +20,7 @@ class SchedulesController < ApplicationController
 
   def create
     @schedule = Schedule.new(schedule_params)
+    @schedule.id = @schedule.week_of.strftime("%Y%m%d").to_i
     @employees = Employee.where(user: current_user)
 
     if @schedule.save
@@ -88,7 +89,12 @@ class SchedulesController < ApplicationController
 
   private
   def schedule_params
-    params.require(:schedule).permit(:week_of).merge(user: current_user)
+    new_params = params.require(:schedule).permit(:week_of).merge(user: current_user)
+    year = params[:schedule][:week_of][0..3].to_i
+    month = params[:schedule][:week_of][4..5].to_i
+    day = params[:schedule][:week_of][6..7].to_i
+    new_params[:week_of] = DateTime.new(year, month, day).utc.beginning_of_week(:sunday)
+    new_params
   end
 
   def shifts_params
