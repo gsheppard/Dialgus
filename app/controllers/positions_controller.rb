@@ -20,6 +20,18 @@ class PositionsController < ApplicationController
     redirect_to employees_path
   end
 
+  def destroy
+    @position = Position.find(params[:id])
+
+    if @position.destroy
+      flash[:notice] = "Position successfully deleted"
+    else
+      flash[:alert] = "Position could not be deleted"
+    end
+
+    redirect_to employees_path
+  end
+
   private
   def position_params
     params.require(:position).permit(:name)

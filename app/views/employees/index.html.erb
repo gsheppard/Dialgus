@@ -54,7 +54,7 @@
         <% @positions.each do |position| %>
           <tr>
             <td><%= position.name %></td>
-            <td><%= link_to 'Remove', '#' %></td>
+            <td><%= link_to 'Remove', position_path(position), method: :delete %></td>
           </tr>
         <% end %>
       </table>
