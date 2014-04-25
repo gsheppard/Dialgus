@@ -16,7 +16,7 @@
 
     <tbody>
       <% @shifts.each do |employee, shifts| %>
-        <a href="#"><tr>
+        <tr>
           <td class="name"><%= employee.first_name %></td>
 
           <%= f.simple_fields_for "employee_#{employee.id}" do |ff| %>
@@ -35,7 +35,7 @@
               <% end %>
             <% end %>
           <% end %>
-        </tr></a>
+        </tr>
       <% end %>
     </tbody>
 
