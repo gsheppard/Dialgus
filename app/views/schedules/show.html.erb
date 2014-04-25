@@ -20,14 +20,18 @@
           <td class="name"><%= employee.first_name %></td>
 
           <%= f.simple_fields_for "employee_#{employee.id}" do |ff| %>
-            <% shifts.each_with_index do |shift, i| %>
-              <%= ff.simple_fields_for "shift_#{i}_#{shift.id}", shift do |s| %>
-                  <td class="start<%= request_check(shift) %>" data-weekday="<%= shift.start_time.wday %>">
-                    <%= s.input :start_time, label: false, selected: [shift.start_time.strftime("%l:%M %p")], collection: time_drop_down(shift.start_time), value_method: lambda{|d| strftime_to_military(d) } %>
-                  </td>
-                  <td class="end<%= request_check(shift) %>" data-weekday="<%= shift.start_time.wday %>">
-                    <%= s.input :end_time, label: false, selected: [shift.end_time.strftime("%l:%M %p")], collection: time_drop_down(shift.end_time), value_method: lambda{|d| strftime_to_military(d) } %>
-                  </td>
+            <% if shifts.empty? %>
+              <td colspan="14">New employee? <%= link_to 'Create shifts here.', create_shifts_path(@week.id, employee.id), method: 'post' %></td>
+            <% else %>
+              <% shifts.each_with_index do |shift, i| %>
+                <%= ff.simple_fields_for "shift_#{i}_#{shift.id}", shift do |s| %>
+                    <td class="start<%= request_check(shift) %>" data-weekday="<%= shift.start_time.wday %>">
+                      <%= s.input :start_time, label: false, selected: [shift.start_time.strftime("%l:%M %p")], collection: time_drop_down(shift.start_time), value_method: lambda{|d| strftime_to_military(d) } %>
+                    </td>
+                    <td class="end<%= request_check(shift) %>" data-weekday="<%= shift.start_time.wday %>">
+                      <%= s.input :end_time, label: false, selected: [shift.end_time.strftime("%l:%M %p")], collection: time_drop_down(shift.end_time), value_method: lambda{|d| strftime_to_military(d) } %>
+                    </td>
+                <% end %>
               <% end %>
             <% end %>
           <% end %>

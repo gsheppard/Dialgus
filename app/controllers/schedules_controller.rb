@@ -41,6 +41,22 @@ class SchedulesController < ApplicationController
     end
   end
 
+  def create_shifts
+    employee = Employee.find(params[:employee_id].to_i)
+    week = Schedule.find(params[:week_id].to_i)
+
+    7.times do |n|
+      Shift.create(
+        employee: employee,
+        schedule: week,
+        start_time: week.week_of + n.days,
+        end_time: week.week_of + n.days
+      )
+    end
+
+    redirect_to schedule_path(week)
+  end
+
   def update
     @week = Schedule.find(params[:id])
     @shifts = build_employee_shifts

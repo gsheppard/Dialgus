@@ -1,27 +1,37 @@
-<table class="requests">
-  <thead>
-    <th>Employee</th>
-    <th>Position</th>
-    <th>Date</th>
-    <th>Type</th>
-  </thead>
-  <tbody>
-    <% @requests.each do |request| %>
-      <tr>
-        <td><%= request.employee.first_name %></td>
-        <td><%= request.employee.position.name %></td>
-        <td><%= request.request_date %></td>
-        <td><%= request.request_type %></td>
-      </tr>
+<div class="row first-element">
+  <h3 class="algreya text-center">Time Off Requests</h3>
+</div>
+
+<div class="row first-element">
+  <div class="large-6 medium-12 columns">
+    <table class="requests">
+      <thead>
+        <th>Employee</th>
+        <th>Position</th>
+        <th>Date</th>
+        <th>Type</th>
+      </thead>
+      <tbody>
+        <% @requests.each do |request| %>
+          <tr>
+            <td><%= request.employee.first_name %></td>
+            <td><%= request.employee.position.name %></td>
+            <td><%= request.request_date.strftime("%m/%d/%Y") %></td>
+            <td><%= request.request_type %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="large-6 medium-12 columns">
+    <%= simple_form_for @request do |f| %>
+      <%= f.association :employee, collection: @employees, label_method: :first_name %>
+      <%= f.input :request_date, as: :string, input_html: { class: 'datepicker' } %>
+      <%= f.input :request_type, collection: ["Vacation", "Sick"] %>
+
+      <%= f.button :submit, "Add" %>
     <% end %>
-  </tbody>
-</table>
-
-<%= simple_form_for @request do |f| %>
-  <%= f.association :employee, collection: @employees, label_method: :first_name %>
-  <%= f.input :request_date, as: :string, input_html: { class: 'datepicker' } %>
-  <%= f.input :request_type, collection: ["Vacation", "Sick"] %>
-
-  <%= f.button :submit, "Add" %>
-<% end %>
+  </div>
+</div>
 

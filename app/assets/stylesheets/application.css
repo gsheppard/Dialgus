@@ -24,7 +24,7 @@
 }
 
 .home-bg {
-  background-image: url('workingblur.jpg');
+  background-image: url('https://s3.amazonaws.com/dialgus/workingblur.jpg');
   background-size: 100% 100%;
   background-repeat: no-repeat;
 }
@@ -35,4 +35,12 @@
 
 .padding {
   padding-top: 15%;
+}
+
+.first-element {
+  padding-top: 30px;
+}
+
+.requests {
+  width: 100%;
 }

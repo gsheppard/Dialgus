@@ -1,7 +1,7 @@
 class Employee < ActiveRecord::Base
   belongs_to :user
   belongs_to :position
-  has_many :requests
+  has_many :requests, dependent: :destroy
 
   EmailRegex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
 
