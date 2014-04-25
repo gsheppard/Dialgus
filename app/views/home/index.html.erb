@@ -1,8 +1,16 @@
-<div class="row">
-  <div class="small-5 columns">
-    <%= image_tag "calendar.png", size: "300x300" %>
-  </div>
-  <div class="small-7 columns">
-    <h2 class="algreya">Scheduling made by someone who schedules.</h2>
+<div class="padding">
+
+</div>
+<div class="row middle">
+  <div class="small-7 columns small-centered text-center">
+    <h1 class="algreya white">Scheduling made by someone who knows the struggle.</h2>
+    <div class="row">
+      <% if user_signed_in? %>
+        <%= link_to 'Start Scheduling', schedules_path, class: 'button success' %>
+      <% else %>
+        <%= link_to 'Sign In', new_user_session_path, class: 'button' %>
+        <%= link_to 'Sign Up', new_user_registration_path, class: 'button' %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -13,10 +13,11 @@
     <link href='http://fonts.googleapis.com/css?family=Alegreya+Sans' rel='stylesheet' type='text/css'>
   </head>
 
-  <body>
+  <body class="<%= 'home-bg' if !@root.nil? %>">
 
-
-    <%= render 'layouts/nav' %>
+    <% if @root.nil? %>
+      <%= render 'layouts/nav' %>
+    <% end %>
     <%= render 'layouts/flash' %>
 
     <div id="main-content">

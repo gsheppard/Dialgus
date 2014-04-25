@@ -18,3 +18,21 @@
 .algreya {
   font-family: 'Alegreya Sans', 'sans-serif';
 }
+
+.white {
+  color: white;
+}
+
+.home-bg {
+  background-image: url('workingblur.jpg');
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.home-bg h1 {
+  font-color: white;
+}
+
+.padding {
+  padding-top: 15%;
+}
