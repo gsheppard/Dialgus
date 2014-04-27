@@ -78,14 +78,20 @@
   width: 100%;
 }
 
-.week-highlight {
-  background-color: #FAE6EE;
-}
-
 .fc-week:hover {
-  background-color: #FAE6EE;
+  background-color: #C3E0FF;
 }
 
 .schedules input.button {
   margin: 0;
+}
+
+/* Full Calendar */
+.fc-header {
+  background-color: transparent;
+  border: none;
+}
+
+#calendar table {
+  heght: 100%;
 }

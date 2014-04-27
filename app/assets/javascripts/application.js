@@ -19,6 +19,9 @@
 $(function() {
   $('.datepicker').datepicker();
   $(document).foundation();
+  if (window.location.pathname == '/') {
+    $.backstretch("https://s3.amazonaws.com/dialgus/workingblur.jpg");
+  };
 
   $('.schedules').on('click', 'th[data-weekday]', function(e){
 

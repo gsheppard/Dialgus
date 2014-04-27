@@ -8,13 +8,9 @@
   <section class="top-bar-section">
     <ul class="right">
       <% if current_user %>
+        <li><%= link_to 'Schedules', schedules_path %></li>
+        <li><%= link_to 'Time Off', requests_path %></li>
         <li><%= link_to 'Employees', employees_path %></li>
-        <li class="has-dropdown">
-          <%= link_to 'Schedules', schedules_path %>
-          <ul class="dropdown">
-            <li><%= link_to "Time Off Requests", requests_path %></li>
-          </ul>
-        </li>
         <li class="has-dropdown">
           <a href="#"><%= current_user.first_name %></a>
           <ul class="dropdown">
