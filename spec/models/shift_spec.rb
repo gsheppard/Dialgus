@@ -25,12 +25,13 @@ describe Shift do
 
     it 'has an invalid date if outside of 7 days' do
       week = FactoryGirl.create(:schedule)
+      next_week = week.week_of + 8.days
       employee = FactoryGirl.create(:employee)
       shift = Shift.new(
         employee: employee,
         schedule: week,
-        start_time: DateTime.new(week.week_of.year, week.week_of.month, week.week_of.day + 8, 12, 30),
-        end_time: DateTime.new(week.week_of.year, week.week_of.month, week.week_of.day + 8, 9, 30)
+        start_time: DateTime.new(next_week.year, next_week.month, next_week.day, 12, 30),
+        end_time: DateTime.new(next_week.year, next_week.month, next_week.day, 9, 30)
       )
 
       expect(shift).to_not be_valid
