@@ -21,9 +21,10 @@ feature 'manager adds positions', %q{
     end
 
     scenario 'add new position with valid attributes' do
-      fill_in 'Name', with: 'Experience Engineer'
+      # fill_in 'Name', with: 'Experience Engineer'
 
       within(:css, '.new_position') do
+        fill_in 'position_name', with: 'Experience Engineer'
         click_button 'Add'
       end
 
@@ -42,9 +43,8 @@ feature 'manager adds positions', %q{
     end
 
     scenario 'attempt new repeated position' do
-      fill_in 'Name', with: 'Launcher'
-
       within(:css, '.new_position') do
+        fill_in 'position_name', with: 'Launcher'
         click_button 'Add'
       end
 
@@ -62,9 +62,8 @@ feature 'manager adds positions', %q{
       sign_in_as(position1.user)
       visit employees_path
 
-      fill_in 'Name', with: position2.name
-
       within(:css, '.new_position') do
+        fill_in 'position_name', with: position2.name
         click_button 'Add'
       end
 
