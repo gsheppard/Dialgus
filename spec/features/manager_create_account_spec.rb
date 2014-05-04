@@ -34,7 +34,7 @@ feature 'manager create account', %q{
     click_button 'Create'
 
     expect(page).to have_content('Account successfully created.')
-    expect(page).to have_content('Sign Out')
+    expect(page).to have_link('Start Scheduling')
   end
 
   scenario 'attempt to create account with invalid attributes' do
