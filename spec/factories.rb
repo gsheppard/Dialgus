@@ -26,7 +26,7 @@ FactoryGirl.define do
   end
 
   factory :schedule do
-    week_of DateTime.now.at_beginning_of_week(:sunday)
+    week_of DateTime.now.utc.at_beginning_of_week(:sunday)
 
     user
   end

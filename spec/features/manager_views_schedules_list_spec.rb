@@ -12,32 +12,42 @@ feature 'manager views schedules list', %q{
   # Each item links to the full schedule layout
 
   let(:user) { FactoryGirl.create(:user) }
-  let!(:week) { FactoryGirl.create(:schedule, user: user) }
+  let!(:week) do
+    w = FactoryGirl.build(:schedule, user: user)
+    w.id = w.week_of.strftime("%Y%m%d").to_i
+    w.save
+    w
+  end
   let!(:employees) { FactoryGirl.create_list(:employee, 5, user: user) }
 
-  context "signed in" do
+  context "signed in", js: true do
     before :each do
+      @date = DateTime.now.utc.beginning_of_day
       sign_in_as(user)
-      date = DateTime.now.utc.beginning_of_day
       visit schedules_path
     end
 
-    scenario "sees calendar of current month"
-    scenario "click on existing schedule-week"
-    scenario "click on non-existent schedule-week"
+    scenario "sees calendar of current month" do
+      expect(page).to have_content(@date.strftime('%b %Y'))
+    end
 
-    # scenario "views a list of the created schedules" do
-    #   expect(page).to have_content(week.week_of.strftime("%b %d, %Y"))
-    # end
+    xscenario "click on existing schedule-week" do
+      sunday = week.week_of.strftime("%Y-%m-%d")
 
-    # scenario "cannot see other users' schedules" do
-    #   other_week = FactoryGirl.create(:schedule, week_of: DateTime.now.beginning_of_week(:sunday) + 2.weeks)
-    #   visit current_path
+      # rspec is not loading the JS the way I thought it was
+      # and therefore is not activating the JS-link
+      # to a given schedule page
+      find(".fc-day[data-date='#{sunday}']").click
+      expect(current_path).to eq(schedule_path(week))
+    end
 
-    #   within(:css, ".schedules_list") do
-    #     expect(page).to_not have_content(other_week.week_of.strftime("%b %d, %Y"))
-    #   end
-    # end
+    xscenario "click on non-existent schedule-week" do
+      next_sunday = (week.week_of + 1.weeks).strftime("%Y-%m-%d")
+
+      # rspec is not loading the JS the way I thought it was
+      find(".fc-day[data-date='#{next_sunday}']").click
+      expect(page).to have_content("Create new schedule for week of #{next_sunday.delete('-')}")
+    end
   end
 
   context "not signed in" do
