@@ -31,9 +31,7 @@ feature 'user signs in', %q{
       click_on 'Sign In'
     end
 
-    expect(page).to have_content(@user.first_name)
-    expect(page).to have_content('Sign Out')
-    expect(page).to_not have_content('Sign In')
+    expect(page).to have_content('Start Scheduling')
   end
 
   scenario 'attempt sign in with invalid email' do

@@ -13,6 +13,7 @@ feature 'user signs out', %q{
   scenario 'user signs out successfully' do
     sign_in_as(FactoryGirl.create(:user))
 
+    visit employees_path
     click_link 'Sign Out'
 
     expect(page).to have_content('Sign Up')
@@ -24,7 +25,7 @@ feature 'user signs out', %q{
   scenario 'link is not present when not logged in' do
     visit root_path
 
-    expect(page).to_not have_content('Sign Out')
+    expect(page).to_not have_content('Start Scheduling')
   end
 
 end
