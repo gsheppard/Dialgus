@@ -1,28 +1,10 @@
-== README
+== Dialgus
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Dialgus is a retail shift management app inspired by a tool I originally made in Excel to do the same thing. Managing many employees is a grueling task, and this tool currently supports the following features:
+- Creating a schedule based on week
+- Hour by Hour breakdown of a given day's schedules
+- Sick and Vacation requests are shown via CSS. The system will allow you to still schedule employees with time-off requests. I did it this way because as someone who actually did shift management, sometimes you just need to ignore their excessive requests.
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+To come:
+- Employees signing up
+- Email notifications
