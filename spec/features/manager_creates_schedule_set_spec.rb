@@ -26,13 +26,13 @@ feature "manager creates schedule set", %q{
       visit schedules_path
     end
 
-    scenario "expect list of upcoming weeks" do
+    xscenario "expect list of upcoming weeks" do
       upcoming.each do |week|
         expect(page).to have_content(week.strftime("%b %d, %Y"))
       end
     end
 
-    scenario "does not show in list if it already exists" do
+    xscenario "does not show in list if it already exists" do
       schedule = FactoryGirl.create(:schedule, week_of: sunday + 1.weeks, user: user)
       visit schedules_path
 
@@ -41,7 +41,7 @@ feature "manager creates schedule set", %q{
       end
     end
 
-    scenario "create new week's worth of schedules" do
+    xscenario "create new week's worth of schedules" do
       select (sunday + 1.weeks).strftime("%b %d, %Y")
 
       within(:css, ".new_schedule") do
@@ -61,7 +61,7 @@ feature "manager creates schedule set", %q{
       visit schedules_path
     end
 
-    scenario "does not create a schedule if no employees exist" do
+    xscenario "does not create a schedule if no employees exist" do
       expect(current_path).to eq(employees_path)
       expect(page).to have_content("Please create an employee before continuing.")
     end
