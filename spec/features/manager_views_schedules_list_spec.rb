@@ -18,21 +18,26 @@ feature 'manager views schedules list', %q{
   context "signed in" do
     before :each do
       sign_in_as(user)
+      date = DateTime.now.utc.beginning_of_day
       visit schedules_path
     end
 
-    scenario "views a list of the created schedules" do
-      expect(page).to have_content(week.week_of.strftime("%b %d, %Y"))
-    end
+    scenario "sees calendar of current month"
+    scenario "click on existing schedule-week"
+    scenario "click on non-existent schedule-week"
 
-    scenario "cannot see other users' schedules" do
-      other_week = FactoryGirl.create(:schedule, week_of: DateTime.now.beginning_of_week(:sunday) + 2.weeks)
-      visit current_path
+    # scenario "views a list of the created schedules" do
+    #   expect(page).to have_content(week.week_of.strftime("%b %d, %Y"))
+    # end
 
-      within(:css, ".schedules_list") do
-        expect(page).to_not have_content(other_week.week_of.strftime("%b %d, %Y"))
-      end
-    end
+    # scenario "cannot see other users' schedules" do
+    #   other_week = FactoryGirl.create(:schedule, week_of: DateTime.now.beginning_of_week(:sunday) + 2.weeks)
+    #   visit current_path
+
+    #   within(:css, ".schedules_list") do
+    #     expect(page).to_not have_content(other_week.week_of.strftime("%b %d, %Y"))
+    #   end
+    # end
   end
 
   context "not signed in" do
