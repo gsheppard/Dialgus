@@ -1,3 +1,55 @@
 <div class="row">
-  <h3 class="algreya text-center">Week of: <%= @week.week_of.strftime("%b %d, %Y") %></h3>
+  <h3 class="lato text-center"><%= @week.week_of.strftime("%b %d, %Y") %> - <%= (@week.week_of + 6.days).strftime("%b %d, %Y") %></h3>
 </div>
+
+<%= simple_form_for @week do |f| %>
+
+  <div class="row sched-table">
+    <!-- Header Row -->
+    <div class="sched-row sched-table-header">
+      <div class="sched-col name-col">
+        <%= f.button :submit, 'Save', action: :update, class: 'tiny' %>
+      </div>
+
+      <% @weekdays.each do |wd| %>
+        <div class="sched-col weekday-col" data-weekday="<%= wd.wday %>">
+          <%= wd.strftime("%A") %><br>
+          <%= wd.strftime("%m/%d") %>
+        </div>
+      <% end %>
+    </div>
+    <!-- End Header Row -->
+
+    <% @shifts.each do |employee, shifts| %>
+      <div class="sched-row">
+        <div class="sched-col name-col">
+          <%= employee.first_name %>
+        </div>
+
+        <%= f.simple_fields_for "employee_#{employee.id}" do |ff| %>
+          <% if shifts.empty? %>
+            <div class="sched-col">
+              New employee? <%= link_to 'Create shifts here.', create_shifts_path(@week.id, employee.id), method: 'post' %>
+            </div>
+          <% else %>
+            <% shifts.each_with_index do |shift, i| %>
+              <%= ff.simple_fields_for "shift_#{i}_#{shift.id}", shift do |s| %>
+                <div class="sched-col shift-col start<%= request_check(shift) %>" data-weekday="<%= shift.start_time.wday %>">
+                  <!-- <%= s.input :start_time, label: false, selected: [shift.start_time.strftime("%l:%M %p")], collection: time_drop_down(shift.start_time), value_method: lambda{|d| strftime_to_military(d) } %> -->
+                  <%= s.input :start_time, label: false, as: :string %>
+                </div>
+                <div class="sched-col shift-col end<%= request_check(shift) %>" data-weekday="<%= shift.start_time.wday %>">
+                  <!-- <%= s.input :end_time, label: false, selected: [shift.end_time.strftime("%l:%M %p")], collection: time_drop_down(shift.end_time), value_method: lambda{|d| strftime_to_military(d) } %> -->
+                  <%= s.input :end_time, label: false, as: :string %>
+                </div>
+              <% end %> <!-- End ff.simple_fields_for -->
+            <% end %> <!-- End shifts.each -->
+          <% end %> <!-- End if statement -->
+        <% end %> <!-- End f.simple_fields_for-->
+
+      </div>
+    <% end %>
+
+  </div>
+
+<% end %>

@@ -1,0 +1,48 @@
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700,900);
+@import url(http://fonts.googleapis.com/css?family=Lato:400,900);
+
+.lato {
+  font-family: 'Lato', sans-serif;
+  font-weight: 900;
+}
+
+.sched-table {
+  display: table;
+  width: 100%;
+  margin: 0 auto 50px auto;
+}
+
+.sched-row {
+  display: table-row;
+  width: 100%;
+}
+
+.sched-col {
+  display: table-column;
+  float: left;
+  height: 40px;
+  border: 1px solid #fff;
+  background-color: #F5F5F5;
+  &.name-col {
+    width: 9%;
+  }
+  &.weekday-col {
+    width: 13%;
+  }
+  &.shift-col {
+    width: 6.5%;
+  }
+}
+
+.sched-table-header {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.95em;
+  font-weight: 400;
+  text-align: center;
+  line-height: 20px;
+}
+
+.sched-table-header .tiny {
+  margin: 2px;
+  width: 93%;
+}
